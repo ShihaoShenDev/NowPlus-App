@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NowPlus.Cross.PageModels"
+             x:DataType="viewmodels:TimerPageModel"
+             x:Class="NowPlus.Cross.Pages.TimerPage"
+             Title="Timer">
+    <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+        <Label Text="{Binding RemainingTime}"
+               FontSize="80"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               FontFamily="monospace" />
+
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsNotRunning}">
+            <VerticalStackLayout>
+                <Label Text="Hrs" HorizontalOptions="Center" />
+                <Entry Text="{Binding Hours}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="Min" HorizontalOptions="Center" />
+                <Entry Text="{Binding Minutes}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2">
+                <Label Text="Sec" HorizontalOptions="Center" />
+                <Entry Text="{Binding Seconds}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Button Text="{Binding StartStopText}"
+                    Command="{Binding StartStopCommand}"
+                    WidthRequest="120" />
+            <Button Text="Reset"
+                    Command="{Binding ResetCommand}"
+                    WidthRequest="120" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

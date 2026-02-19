@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [z:\Shihao\Src\NowPlus App\NowPlus.Cross\NowPlus.Cross.csproj::TargetFramework=net10.0-windows10.0.19041.0]
+  XAML source generation is enabled (MauiXamlInflator=SourceGen). This generates C# code from XAML at compile time for better performance. To disable, remove the MauiXamlInflator line from your .csproj file (reverts to configuration-based defaults: Runtime in Debug, XamlC in Release).
+  NowPlus.Cross -> z:\Shihao\Src\NowPlus App\NowPlus.Cross\bin\Debug\net10.0-windows10.0.19041.0\win-x64\NowPlus.Cross.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:27.25

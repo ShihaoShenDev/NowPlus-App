@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NowPlus.Cross.PageModels"
+             x:DataType="viewmodels:StopwatchPageModel"
+             x:Class="NowPlus.Cross.Pages.StopwatchPage"
+             Title="Stopwatch">
+    <Grid RowDefinitions="Auto, Auto, *" Padding="30" RowSpacing="20">
+        <Label Grid.Row="0"
+               Text="{Binding ElapsedTime}"
+               FontSize="64"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               FontFamily="monospace" />
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="20" HorizontalOptions="Center">
+            <Button Text="{Binding StartStopText}"
+                    Command="{Binding StartStopCommand}"
+                    WidthRequest="100" />
+            <Button Text="Lap"
+                    Command="{Binding LapCommand}"
+                    IsEnabled="{Binding IsRunning}"
+                    WidthRequest="100" />
+            <Button Text="Reset"
+                    Command="{Binding ResetCommand}"
+                    WidthRequest="100" />
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Laps}">
+            <CollectionView.Header>
+                <Label Text="Laps" FontAttributes="Bold" Margin="0,10" />
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Grid Padding="10">
+                        <Label Text="{Binding .}" FontSize="18" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
