@@ -6,27 +6,35 @@
              x:Class="NowPlus.Cross.Pages.TimerPage"
              Title="Timer">
     <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
-        <Label Text="{Binding RemainingTime}"
+        <Label Text="{Binding RemainingTimeDisplay}"
                FontSize="80"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                FontFamily="monospace" />
 
-        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsNotRunning}">
-            <VerticalStackLayout>
-                <Label Text="Hrs" HorizontalOptions="Center" />
-                <Entry Text="{Binding Hours}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsNotRunning}" HorizontalOptions="Center" WidthRequest="300">
+            <!-- Hours -->
+            <VerticalStackLayout Grid.Column="0" Spacing="5" HorizontalOptions="Center">
+                <Button ImageSource="{StaticResource IconAdd}" Command="{Binding AdjustHoursCommand}" CommandParameter="1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="{Binding Hours, StringFormat='{0:D2}'}" FontSize="32" HorizontalOptions="Center" FontAttributes="Bold" />
+                <Button ImageSource="{StaticResource IconSubtract}" Command="{Binding AdjustHoursCommand}" CommandParameter="-1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="Hrs" HorizontalOptions="Center" FontSize="12" Opacity="0.7" />
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.Column="1">
-                <Label Text="Min" HorizontalOptions="Center" />
-                <Entry Text="{Binding Minutes}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+            <!-- Minutes -->
+            <VerticalStackLayout Grid.Column="1" Spacing="5" HorizontalOptions="Center">
+                <Button ImageSource="{StaticResource IconAdd}" Command="{Binding AdjustMinutesCommand}" CommandParameter="1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="{Binding Minutes, StringFormat='{0:D2}'}" FontSize="32" HorizontalOptions="Center" FontAttributes="Bold" />
+                <Button ImageSource="{StaticResource IconSubtract}" Command="{Binding AdjustMinutesCommand}" CommandParameter="-1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="Min" HorizontalOptions="Center" FontSize="12" Opacity="0.7" />
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.Column="2">
-                <Label Text="Sec" HorizontalOptions="Center" />
-                <Entry Text="{Binding Seconds}" Keyboard="Numeric" HorizontalOptions="Center" WidthRequest="60" MaxLength="2" />
+            <!-- Seconds -->
+            <VerticalStackLayout Grid.Column="2" Spacing="5" HorizontalOptions="Center">
+                <Button ImageSource="{StaticResource IconAdd}" Command="{Binding AdjustSecondsCommand}" CommandParameter="1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="{Binding Seconds, StringFormat='{0:D2}'}" FontSize="32" HorizontalOptions="Center" FontAttributes="Bold" />
+                <Button ImageSource="{StaticResource IconSubtract}" Command="{Binding AdjustSecondsCommand}" CommandParameter="-1" Style="{StaticResource AdjustmentButtonStyle}" />
+                <Label Text="Sec" HorizontalOptions="Center" FontSize="12" Opacity="0.7" />
             </VerticalStackLayout>
         </Grid>
-
         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
             <Button Text="{Binding StartStopText}"
                     Command="{Binding StartStopCommand}"

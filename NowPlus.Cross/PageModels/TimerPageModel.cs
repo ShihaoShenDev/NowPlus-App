@@ -10,20 +10,36 @@ namespace NowPlus.Cross.PageModels
         private TimeSpan _remainingTimeSpan;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(RemainingTimeDisplay))]
         private string _remainingTime = "00:00:00";
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(RemainingTimeDisplay))]
         private int _hours;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(RemainingTimeDisplay))]
         private int _minutes;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(RemainingTimeDisplay))]
         private int _seconds;
+
+        public string RemainingTimeDisplay 
+        {
+            get 
+            {
+                if (IsRunning || _remainingTimeSpan.TotalSeconds > 0)
+                    return _remainingTime;
+                
+                return $"{Hours:D2}:{Minutes:D2}:{Seconds:D2}";
+            }
+        }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(StartStopText))]
         [NotifyPropertyChangedFor(nameof(IsNotRunning))]
+        [NotifyPropertyChangedFor(nameof(RemainingTimeDisplay))]
         private bool _isRunning;
 
         public string StartStopText => IsRunning ? "Pause" : "Start";
@@ -84,6 +100,38 @@ namespace NowPlus.Cross.PageModels
             Hours = 0;
             Minutes = 0;
             Seconds = 0;
+            OnPropertyChanged(nameof(RemainingTimeDisplay));
+        }
+
+        [RelayCommand]
+        private void AdjustHours(string delta)
+        {
+            if (int.TryParse(delta, out int d))
+                Hours = Math.Max(0, Math.Min(99, Hours + d));
+        }
+
+        [RelayCommand]
+        private void AdjustMinutes(string delta)
+        {
+            if (int.TryParse(delta, out int d))
+            {
+                var newValue = Minutes + d;
+                if (newValue > 59) Minutes = 0;
+                else if (newValue < 0) Minutes = 59;
+                else Minutes = newValue;
+            }
+        }
+
+        [RelayCommand]
+        private void AdjustSeconds(string delta)
+        {
+            if (int.TryParse(delta, out int d))
+            {
+                var newValue = Seconds + d;
+                if (newValue > 59) Seconds = 0;
+                else if (newValue < 0) Seconds = 59;
+                else Seconds = newValue;
+            }
         }
     }
 }
